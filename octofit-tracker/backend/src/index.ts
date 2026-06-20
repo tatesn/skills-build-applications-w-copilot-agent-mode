@@ -8,7 +8,7 @@ import User from './models/User.js';
 import Workout from './models/Workout.js';
 
 const app = express();
-const PORT = 8000;
+const PORT = 8000; // Port number
 const codespaceName = process.env.CODESPACE_NAME;
 
 const getApiBaseUrl = (): string => {
