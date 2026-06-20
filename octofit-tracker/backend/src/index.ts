@@ -1,7 +1,7 @@
 import express from 'express';
-import mongoose from 'mongoose';
 
 import Activity from './models/Activity.js';
+import { connectToDatabase, getMongoReadyState, MONGODB_URI } from './database.js';
 import Leaderboard from './models/Leaderboard.js';
 import Team from './models/Team.js';
 import User from './models/User.js';
@@ -9,7 +9,6 @@ import Workout from './models/Workout.js';
 
 const app = express();
 const PORT = 8000;
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/octofit_db';
 const codespaceName = process.env.CODESPACE_NAME;
 
 const getApiBaseUrl = (): string => {
@@ -23,7 +22,7 @@ const getApiBaseUrl = (): string => {
 app.use(express.json());
 
 app.get('/api/health', async (_req, res) => {
-  const mongoState = mongoose.connection.readyState;
+  const mongoState = getMongoReadyState();
   res.json({
     status: 'ok',
     mongoReadyState: mongoState,
@@ -58,7 +57,7 @@ app.get('/api/workouts/', async (_req, res) => {
 
 const startServer = async (): Promise<void> => {
   try {
-    await mongoose.connect(MONGODB_URI);
+    await connectToDatabase();
     console.log(`Connected to MongoDB at ${MONGODB_URI}`);
   } catch (error) {
     console.error('MongoDB connection failed. The API will still start:', error);
