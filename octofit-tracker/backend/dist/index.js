@@ -1,6 +1,6 @@
 import express from 'express';
 import Activity from './models/Activity.js';
-import { connectToDatabase, getMongoReadyState, MONGODB_URI } from './database.js';
+import { connectToDatabase, getMongoReadyState, MONGODB_URI } from './config/database.js';
 import Leaderboard from './models/Leaderboard.js';
 import Team from './models/Team.js';
 import User from './models/User.js';

@@ -1,5 +1,5 @@
 import Activity from '../models/Activity.js';
-import { connectToDatabase, disconnectDatabase } from '../database.js';
+import { connectToDatabase, disconnectDatabase } from '../config/database.js';
 import Leaderboard from '../models/Leaderboard.js';
 import Team from '../models/Team.js';
 import User from '../models/User.js';
